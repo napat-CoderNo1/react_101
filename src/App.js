@@ -1,22 +1,20 @@
 // import logo from "./logo.svg";
 import "./App.css";
+import Transaction from "./components/Transaction";
+
+const Title = () => {
+  return <h1>โปรแกรมบัญชีรายรับ-รายจ่าย</h1>;
+};
+const Description = () => {
+  return <p>บันทึกข้อมูลบัญชีรายวัน</p>;
+};
 
 function App() {
   return (
     <div>
-      <h1>โปรแกรมบัญชีรายรับ-รายจ่าย</h1>
-      <p>บันทึกข้อมูลบัญชีรายวัน</p>
-      <ul>
-        <li>
-          ค่าเดินทาง <span>-200</span>
-        </li>
-        <li>
-          เงินเดือน <span>+20,0000</span>
-        </li>
-        <li>
-          ค่าอาหาร <span>-500</span>
-        </li>
-      </ul>
+      <Title />
+      <Description />
+      <Transaction />
     </div>
   );
 }
