@@ -2,6 +2,7 @@
 import "./App.css";
 import Transaction from "./components/Transaction";
 import Form from "./components/Form";
+import { useState } from "react";
 
 const Title = () => {
   const design = { color: "red", textAlign: "center", fontSize: "1.5rem" };
@@ -9,11 +10,22 @@ const Title = () => {
 };
 
 function App() {
+  // state
+  const [items, setItems] = useState([]);
+
+  // function
+  const onAddNewItem = (newItem) => {
+    setItems((prevItem) => {
+      return [newItem, ...prevItem];
+    });
+  };
+
+  // HTML
   return (
     <div className="app-container">
       <Title />
-      <Form />
-      <Transaction />
+      <Form onAddItem={onAddNewItem} />
+      <Transaction items={items} />
     </div>
   );
 }

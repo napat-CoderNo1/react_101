@@ -1,16 +1,29 @@
+import { useState } from "react";
 import "./Form.css";
+import { v4 as uuidv4 } from "uuid";
 
-const Form = () => {
+const Form = (props) => {
+  // useState
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+
   // Function on-change
   const inputTitle = (event) => {
-    console.log(event.target.value);
+    setTitle(event.target.value);
   };
   const inputAmount = (event) => {
-    console.log(event.target.value);
+    setAmount(event.target.value);
   };
   const saveItem = (event) => {
     event.preventDefault();
-    console.log("บันทึกข้อมูลเรียบร้อย");
+    const itemData = {
+      id: uuidv4(),
+      title: title,
+      amount: Number(amount),
+    };
+    props.onAddItem(itemData);
+    setTitle("");
+    setAmount("");
   };
 
   // HTML
@@ -23,6 +36,7 @@ const Form = () => {
             type="text"
             placeholder="ระบุชื่อรายการของคุณ"
             onChange={inputTitle}
+            value={title}
           />
         </div>
         <div className="form-control">
@@ -31,6 +45,7 @@ const Form = () => {
             type="text"
             placeholder="(+ รายรับ, - รายจ่าย)"
             onChange={inputAmount}
+            value={amount}
           />
         </div>
         <div>
