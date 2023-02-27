@@ -5,6 +5,7 @@ import Form from "./components/Form";
 import { useEffect, useReducer, useState } from "react";
 import DataContext from "./data/DataContext";
 import Report from "./components/Report";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const Title = () => {
   const design = { color: "red", textAlign: "center", fontSize: "1.5rem" };
@@ -64,15 +65,31 @@ function App() {
       }}
     >
       <div className="app-container">
-        {showReport && <Report />}
         <Title />
-        <Form onAddItem={onAddNewItem} />
-        <Transaction items={items} />
-        <div align="center">
-          <h1>{result}</h1>
-          <button onClick={() => dispatch({ type: "SHOW" })}>แสดง</button>
-          <button onClick={() => dispatch({ type: "HIDE" })}>ซ่อน</button>
-        </div>
+        <Router>
+          <div>
+            <ul className="horizontal-menu">
+              <li>
+                <Link to="/">ข้อมูลบัญชี</Link>
+              </li>
+              <li>
+                <Link to="/insert">บันทึกข้อมูล</Link>
+              </li>
+            </ul>
+            <Routes>
+              <Route path="/" element={<Report />}></Route>
+              <Route
+                path="/insert"
+                element={
+                  <>
+                    <Form onAddItem={onAddNewItem} />{" "}
+                    <Transaction items={items} />{" "}
+                  </>
+                }
+              ></Route>
+            </Routes>
+          </div>
+        </Router>
       </div>
     </DataContext.Provider>
   );
