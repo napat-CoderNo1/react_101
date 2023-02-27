@@ -11,6 +11,7 @@ const Form = (props) => {
 
   // useEffect
   useEffect(() => {
+    console.log("Call useEffect");
     const checkData = title.trim().length > 0 && amount !== 0;
     setFormValid(checkData);
   }, [title, amount]);
